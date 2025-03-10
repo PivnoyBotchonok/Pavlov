@@ -5,32 +5,97 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1.Pages.Tables"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="RegionTable" Background="White" IsVisibleChanged="Page_IsVisibleChanged">
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Title="RegionTable" 
+      Background="#FFE0E0E0"
+      IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="IsTabStop" Value="True"/>
+        </Style>
+
+        <Style x:Key="DataGridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#FF2196F3"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="0" x:Name="dataGrid">
+
+        <DataGrid AutoGenerateColumns="False" 
+                  IsReadOnly="True" 
+                  Grid.Column="0" 
+                  x:Name="dataGrid"
+                  Background="White"
+                  RowBackground="#FFF5F5F5"
+                  AlternatingRowBackground="#FFE3F2FD"
+                  HeadersVisibility="Column"
+                  ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Владелец" Binding="{Binding Client.FIO}" Width="1*"/>
-                <DataGridTextColumn Header="Адрес" Binding="{Binding Addres}" Width="1*"/>
-                <DataGridTextColumn Header="Координаты" Binding="{Binding Coordinate}" Width="1*"/>
-                <DataGridTextColumn Header="Площадь" Binding="{Binding Area}" Width="1*"/>
+                <DataGridTextColumn Header="Владелец" 
+                                    Binding="{Binding Client.FIO}" 
+                                    Width="1*"/>
+                <DataGridTextColumn Header="Адрес" 
+                                    Binding="{Binding Addres}" 
+                                    Width="1*"/>
+                <DataGridTextColumn Header="Координаты" 
+                                    Binding="{Binding Coordinate}" 
+                                    Width="1*"/>
+                <DataGridTextColumn Header="Площадь" 
+                                    Binding="{Binding Area}" 
+                                    Width="1*"/>
                 <DataGridTemplateColumn Width="1*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button x:Name="editBut" Content="Изменить" Click="editBut_Click" />
+                            <Button x:Name="editBut" 
+                                    Content="Изменить" 
+                                    Click="editBut_Click" 
+                                    Style="{StaticResource CustomButtonStyle}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <StackPanel Grid.Column="1" Margin="5" Grid.RowSpan="2">
-            <Button x:Name="addBut" Content="Добавить" Click="addBut_Click"/>
-            <Button x:Name="delBut" Content="Удалить" Click="delBut_Click"/>
+
+        <StackPanel Grid.Column="1" 
+                    Margin="5" 
+                    Grid.RowSpan="2">
+            <Button x:Name="addBut" 
+                    Content="Добавить" 
+                    Click="addBut_Click"
+                    Style="{StaticResource CustomButtonStyle}"/>
+            <Button x:Name="delBut" 
+                    Content="Удалить" 
+                    Click="delBut_Click"
+                    Style="{StaticResource CustomButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Page>

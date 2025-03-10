@@ -5,54 +5,180 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="RegObjectPage" Background="White">
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Title="RegObjectPage" 
+      Background="#FFE0E0E0">
+
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="IsTabStop" Value="True"/>
+        </Style>
+
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="BorderBrush" Value="#FFCCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="0 5"/>
+            <Setter Property="BorderBrush" Value="#FFCCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        </Style>
+    </Page.Resources>
 
     <Grid>
-        <Button x:Name="backBut" Content="Назад" HorizontalAlignment="Left" Click="backBut_Click" VerticalAlignment="Top"/>
-        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <Label Content="Владелец"/>
-            <ComboBox x:Name="Owner_cmbBox"/>
-            <Label Content="Город"/>
-            <TextBox x:Name="Country" />
-            <Label Content="Улица"/>
-            <TextBox x:Name="Street"/>
-            <Label Content="Номер дома"/>
-            <TextBox x:Name="NumHome" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
-            <Label Content="Номер квартиры"/>
-            <TextBox x:Name="NumRoom" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+        <Button x:Name="backBut" 
+                Content="Назад" 
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Click="backBut_Click" 
+                Style="{StaticResource CustomButtonStyle}"/>
+
+        <StackPanel VerticalAlignment="Center" 
+                    HorizontalAlignment="Center" 
+                    Width="300">
+            <Label Content="Владелец" 
+                   Style="{StaticResource LabelStyle}"/>
+            <ComboBox x:Name="Owner_cmbBox" 
+                      Style="{StaticResource ComboBoxStyle}"/>
+
+            <Label Content="Город" 
+                   Style="{StaticResource LabelStyle}"/>
+            <TextBox x:Name="Country" 
+                     Style="{StaticResource TextBoxStyle}"/>
+
+            <Label Content="Улица" 
+                   Style="{StaticResource LabelStyle}"/>
+            <TextBox x:Name="Street" 
+                     Style="{StaticResource TextBoxStyle}"/>
+
+            <Label Content="Номер дома" 
+                   Style="{StaticResource LabelStyle}"/>
+            <TextBox x:Name="NumHome" 
+                     Style="{StaticResource TextBoxStyle}" 
+                     PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+
+            <Label Content="Номер квартиры" 
+                   Style="{StaticResource LabelStyle}"/>
+            <TextBox x:Name="NumRoom" 
+                     Style="{StaticResource TextBoxStyle}" 
+                     PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+
             <StackPanel Orientation="Horizontal">
-                <Label Content="Широта"/>
-                <TextBox x:Name="Width" Width="25"/>
-                <Label Content="Долгота"/>
-                <TextBox x:Name="Lenght" Width="25"/>
+                <Label Content="Широта" 
+                       Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="Width" 
+                          Width="50" 
+                          Style="{StaticResource TextBoxStyle}"/>
+                <Label Content="Долгота" 
+                       Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="Lenght" 
+                         Width="50" 
+                         Style="{StaticResource TextBoxStyle}"/>
             </StackPanel>
-            <ComboBox x:Name="Object_cmbBox" SelectionChanged="Object_cmbBox_SelectionChanged">
-                <Label Content="Квартира"/>
-                <Label Content="Дом"/>
-                <Label Content="Участок"/>
+
+            <ComboBox x:Name="Object_cmbBox" 
+                       Style="{StaticResource ComboBoxStyle}" 
+                       SelectionChanged="Object_cmbBox_SelectionChanged">
+                <ComboBoxItem Content="Квартира"/>
+                <ComboBoxItem Content="Дом"/>
+                <ComboBoxItem Content="Участок"/>
             </ComboBox>
-            <StackPanel x:Name="Flat" Visibility="Collapsed">
-                <Label Content="Этаж"/>
-                <TextBox x:Name="Floor" Text="{Binding Floor}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
-                <Label Content="Кол-во комнат"/>
-                <TextBox x:Name="NumRooms_Flat" Text="{Binding NumRooms}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
-                <Label Content="Площадь"/>
-                <TextBox x:Name="Area_Flat" Text="{Binding Area}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+
+            <StackPanel x:Name="Flat" 
+                        Visibility="Collapsed">
+                <Label Content="Этаж" 
+                       Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="Floor" 
+                         Style="{StaticResource TextBoxStyle}" 
+                         PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+
+                <Label Content="Кол-во комнат" 
+                       Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="NumRooms_Flat" 
+                         Style="{StaticResource TextBoxStyle}" 
+                         PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+
+                <Label Content="Площадь" 
+                       Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="Area_Flat" 
+                         Style="{StaticResource TextBoxStyle}" 
+                         PreviewTextInput="Number_TextBox_PreviewTextInput"/>
             </StackPanel>
-            <StackPanel x:Name="House" Visibility="Collapsed">
-                <Label Content="Этажность дома"/>
-                <TextBox x:Name="FloorCount" Text="{Binding FloorCount}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
-                <Label Content="Кол-во комнат"/>
-                <TextBox x:Name="NumRooms_House" Text="{Binding NumRoom}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
-                <Label Content="Площадь"/>
-                <TextBox x:Name="Area_House" Text="{Binding Area}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+
+            <StackPanel x:Name="House" 
+                        Visibility="Collapsed">
+                <Label Content="Этажность дома" 
+                       Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="FloorCount" 
+                         Style="{StaticResource TextBoxStyle}" 
+                         PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+
+                <Label Content="Кол-во комнат" 
+                       Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="NumRooms_House" 
+                         Style="{StaticResource TextBoxStyle}" 
+                         PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+
+                <Label Content="Площадь" 
+                       Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="Area_House" 
+                         Style="{StaticResource TextBoxStyle}" 
+                         PreviewTextInput="Number_TextBox_PreviewTextInput"/>
             </StackPanel>
-            <StackPanel x:Name="Region" Visibility="Collapsed">
-                <Label Content="Площадь"/>
-                <TextBox x:Name="Area_Region" Text="{Binding Area}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+
+            <StackPanel x:Name="Region" 
+                        Visibility="Collapsed">
+                <Label Content="Площадь" 
+                       Style="{StaticResource LabelStyle}"/>
+                <TextBox x:Name="Area_Region" 
+                         Style="{StaticResource TextBoxStyle}" 
+                         PreviewTextInput="Number_TextBox_PreviewTextInput"/>
             </StackPanel>
-            <Button x:Name="addBut" Content="Добавить" Click="addBut_Click"/>
+
+            <Button x:Name="addBut" 
+                    Content="Добавить" 
+                    Click="addBut_Click" 
+                    Style="{StaticResource CustomButtonStyle}" 
+                    Margin="0 10"/>
         </StackPanel>
     </Grid>
 </Page>

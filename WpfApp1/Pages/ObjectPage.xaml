@@ -5,25 +5,87 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="ObjectPage" Background="White" IsVisibleChanged="Page_IsVisibleChanged">
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Title="ObjectPage" 
+      Background="#FFE0E0E0"
+      IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="IsTabStop" Value="True"/>
+        </Style>
+
+        <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Foreground" Value="#FF333333"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="#FFCCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+    </Page.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
-                <Button x:Name="backBut" Content="Назад" HorizontalAlignment="Left" Click="backBut_Click"/>
-                <Button x:Name="RieltorBut" Content="Риелторы" HorizontalAlignment="Left" Click="RieltorBut_Click"/>
-                <Button x:Name="TradeBut" Content="Сделки" HorizontalAlignment="Left" Click="TradeBut_Click"/>
-                <ComboBox x:Name="Object_cmbBox" SelectionChanged="Object_cmbBox_SelectionChanged">
-                    <ComboBoxItem Content="Квартиры"/>
-                    <ComboBoxItem Content="Дома"/>
-                    <ComboBoxItem Content="Участки"/>
-                </ComboBox>
-            </StackPanel>
-        <Frame x:Name="frameTable" Background="Gray" Grid.Column="0" Grid.Row="1"/>
+
+        <!-- Панель с кнопками и ComboBox -->
+        <StackPanel Orientation="Horizontal" 
+                    Grid.Row="0" 
+                    VerticalAlignment="Center" 
+                    Margin="5">
+            <Button x:Name="backBut" 
+                    Content="Назад" 
+                    Click="backBut_Click" 
+                    Style="{StaticResource CustomButtonStyle}"/>
+
+            <Button x:Name="RieltorBut" 
+                    Content="Риелторы" 
+                    Click="RieltorBut_Click" 
+                    Style="{StaticResource CustomButtonStyle}"/>
+
+            <Button x:Name="TradeBut" 
+                    Content="Сделки" 
+                    Click="TradeBut_Click" 
+                    Style="{StaticResource CustomButtonStyle}"/>
+
+            <ComboBox x:Name="Object_cmbBox" 
+                      Style="{StaticResource ComboBoxStyle}" 
+                      SelectionChanged="Object_cmbBox_SelectionChanged">
+                <ComboBoxItem Content="Квартиры"/>
+                <ComboBoxItem Content="Дома"/>
+                <ComboBoxItem Content="Участки"/>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- Фрейм для отображения таблиц -->
+        <Frame x:Name="frameTable" 
+               Background="White" 
+               Grid.Row="1" 
+               Margin="5"/>
     </Grid>
 </Page>

@@ -5,32 +5,103 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WpfApp1.Pages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="TradePage" Background="White">
+      d:DesignHeight="450" 
+      d:DesignWidth="800"
+      Title="TradePage" 
+      Background="#FFE0E0E0">
+
+    <Page.Resources>
+        <Style x:Key="CustomButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="#FF4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10 5"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="IsEnabled" Value="True"/>
+            <Setter Property="IsTabStop" Value="True"/>
+        </Style>
+
+        <Style x:Key="DataGridHeaderStyle" TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#FF2196F3"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Padding" Value="10"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+    </Page.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="4*"/>
-        <ColumnDefinition Width="1*"/>
-    </Grid.ColumnDefinitions>
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Button x:Name="backBut" Content="Назад" HorizontalAlignment="Left" Click="backBut_Click"/>
-            <Button x:Name="ObjectBut" Content="Недвижимость" HorizontalAlignment="Left" Click="ObjectBut_Click"/>
-            <Button x:Name="RieltorBut" Content="Риелторы" HorizontalAlignment="Left" Click="RieltorBut_Click"/>
-        </StackPanel>
-        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="0" x:Name="dataGrid">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="ФИО" Binding="{Binding Rieltor.FIO}" Width="1*"/>
-                    <DataGridTextColumn Header="Объект недвижимости" Binding="{Binding Object}" Width="1*"/>
-                    <DataGridTextColumn Header="Дата заключения" Binding="{Binding DateTrade , StringFormat={}{0:dd.MM.yyyy}}" Width="1*"/>
-                    <DataGridTextColumn Header="Сумма" Binding="{Binding Amount}" Width="1*"/>
-                    <DataGridTextColumn Header="Отчисления" Binding="{Binding RieltorPart}" Width="1*"/>
-                </DataGrid.Columns>
-        </DataGrid>
-    </StackPanel>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
 
-    <StackPanel Grid.Column="1" Margin="5">
-            <Button x:Name="addBut" Content="Добавить" Click="addBut_Click"/>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="5">
+                <Button x:Name="backBut" 
+                        Content="Назад" 
+                        Click="backBut_Click" 
+                        Style="{StaticResource CustomButtonStyle}"/>
+
+                <Button x:Name="ObjectBut" 
+                        Content="Недвижимость" 
+                        Click="ObjectBut_Click" 
+                        Style="{StaticResource CustomButtonStyle}"/>
+
+                <Button x:Name="RieltorBut" 
+                        Content="Риелторы" 
+                        Click="RieltorBut_Click" 
+                        Style="{StaticResource CustomButtonStyle}"/>
+            </StackPanel>
+
+            <DataGrid AutoGenerateColumns="False" 
+                      IsReadOnly="True" 
+                      Grid.Column="0" 
+                      x:Name="dataGrid"
+                      Background="White"
+                      RowBackground="#FFF5F5F5"
+                      AlternatingRowBackground="#FFE3F2FD"
+                      HeadersVisibility="Column"
+                      ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ФИО" 
+                                       Binding="{Binding Rieltor.FIO}" 
+                                       Width="1*"/>
+                    <DataGridTextColumn Header="Объект недвижимости" 
+                                       Binding="{Binding Object}" 
+                                       Width="1*"/>
+                    <DataGridTextColumn Header="Дата заключения" 
+                                       Binding="{Binding DateTrade, StringFormat={}{0:dd.MM.yyyy}}" 
+                                       Width="1*"/>
+                    <DataGridTextColumn Header="Сумма" 
+                                       Binding="{Binding Amount}" 
+                                       Width="1*"/>
+                    <DataGridTextColumn Header="Отчисления" 
+                                       Binding="{Binding RieltorPart}" 
+                                       Width="1*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" 
+                    Margin="5">
+            <Button x:Name="addBut" 
+                    Content="Добавить" 
+                    Click="addBut_Click" 
+                    Style="{StaticResource CustomButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Page>
