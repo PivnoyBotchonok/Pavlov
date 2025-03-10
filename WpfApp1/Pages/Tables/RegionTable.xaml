@@ -1,0 +1,36 @@
+﻿<Page x:Class="WpfApp1.Pages.Tables.RegionTable"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Pages.Tables"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegionTable" Background="White" IsVisibleChanged="Page_IsVisibleChanged">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="0" x:Name="dataGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Владелец" Binding="{Binding Client.FIO}" Width="1*"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Addres}" Width="1*"/>
+                <DataGridTextColumn Header="Координаты" Binding="{Binding Coordinate}" Width="1*"/>
+                <DataGridTextColumn Header="Площадь" Binding="{Binding Area}" Width="1*"/>
+                <DataGridTemplateColumn Width="1*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="editBut" Content="Изменить" Click="editBut_Click" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column="1" Margin="5" Grid.RowSpan="2">
+            <Button x:Name="addBut" Content="Добавить" Click="addBut_Click"/>
+            <Button x:Name="delBut" Content="Удалить" Click="delBut_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

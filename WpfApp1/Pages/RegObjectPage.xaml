@@ -1,0 +1,58 @@
+﻿<Page x:Class="WpfApp1.Pages.RegObjectPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RegObjectPage" Background="White">
+
+    <Grid>
+        <Button x:Name="backBut" Content="Назад" HorizontalAlignment="Left" Click="backBut_Click" VerticalAlignment="Top"/>
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Label Content="Владелец"/>
+            <ComboBox x:Name="Owner_cmbBox"/>
+            <Label Content="Город"/>
+            <TextBox x:Name="Country" />
+            <Label Content="Улица"/>
+            <TextBox x:Name="Street"/>
+            <Label Content="Номер дома"/>
+            <TextBox x:Name="NumHome" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+            <Label Content="Номер квартиры"/>
+            <TextBox x:Name="NumRoom" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Широта"/>
+                <TextBox x:Name="Width" Width="25"/>
+                <Label Content="Долгота"/>
+                <TextBox x:Name="Lenght" Width="25"/>
+            </StackPanel>
+            <ComboBox x:Name="Object_cmbBox" SelectionChanged="Object_cmbBox_SelectionChanged">
+                <Label Content="Квартира"/>
+                <Label Content="Дом"/>
+                <Label Content="Участок"/>
+            </ComboBox>
+            <StackPanel x:Name="Flat" Visibility="Collapsed">
+                <Label Content="Этаж"/>
+                <TextBox x:Name="Floor" Text="{Binding Floor}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+                <Label Content="Кол-во комнат"/>
+                <TextBox x:Name="NumRooms_Flat" Text="{Binding NumRooms}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+                <Label Content="Площадь"/>
+                <TextBox x:Name="Area_Flat" Text="{Binding Area}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+            </StackPanel>
+            <StackPanel x:Name="House" Visibility="Collapsed">
+                <Label Content="Этажность дома"/>
+                <TextBox x:Name="FloorCount" Text="{Binding FloorCount}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+                <Label Content="Кол-во комнат"/>
+                <TextBox x:Name="NumRooms_House" Text="{Binding NumRoom}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+                <Label Content="Площадь"/>
+                <TextBox x:Name="Area_House" Text="{Binding Area}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+            </StackPanel>
+            <StackPanel x:Name="Region" Visibility="Collapsed">
+                <Label Content="Площадь"/>
+                <TextBox x:Name="Area_Region" Text="{Binding Area}" PreviewTextInput="Number_TextBox_PreviewTextInput"/>
+            </StackPanel>
+            <Button x:Name="addBut" Content="Добавить" Click="addBut_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>

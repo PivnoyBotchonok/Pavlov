@@ -1,0 +1,36 @@
+﻿<Page x:Class="WpfApp1.Pages.TradePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TradePage" Background="White">
+    <Grid>
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="4*"/>
+        <ColumnDefinition Width="1*"/>
+    </Grid.ColumnDefinitions>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="backBut" Content="Назад" HorizontalAlignment="Left" Click="backBut_Click"/>
+            <Button x:Name="ObjectBut" Content="Недвижимость" HorizontalAlignment="Left" Click="ObjectBut_Click"/>
+            <Button x:Name="RieltorBut" Content="Риелторы" HorizontalAlignment="Left" Click="RieltorBut_Click"/>
+        </StackPanel>
+        <DataGrid AutoGenerateColumns="False" IsReadOnly="True" Grid.Column="0" x:Name="dataGrid">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ФИО" Binding="{Binding Rieltor.FIO}" Width="1*"/>
+                    <DataGridTextColumn Header="Объект недвижимости" Binding="{Binding Object}" Width="1*"/>
+                    <DataGridTextColumn Header="Дата заключения" Binding="{Binding DateTrade , StringFormat={}{0:dd.MM.yyyy}}" Width="1*"/>
+                    <DataGridTextColumn Header="Сумма" Binding="{Binding Amount}" Width="1*"/>
+                    <DataGridTextColumn Header="Отчисления" Binding="{Binding RieltorPart}" Width="1*"/>
+                </DataGrid.Columns>
+        </DataGrid>
+    </StackPanel>
+
+    <StackPanel Grid.Column="1" Margin="5">
+            <Button x:Name="addBut" Content="Добавить" Click="addBut_Click"/>
+        </StackPanel>
+    </Grid>
+</Page>
