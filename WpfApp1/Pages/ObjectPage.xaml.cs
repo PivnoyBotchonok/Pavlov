@@ -83,7 +83,7 @@ namespace WpfApp1.Pages
             if (Visibility == Visibility.Visible) // Если страница стала видимой
             {
                 // Перезагружаем данные из базы данных
-                var context = DBEntities.GetContext();
+                var context = PavlovEntities.GetContext();
                 context.ChangeTracker.Entries().ToList().ForEach(entry => entry.Reload());
 
                 // Обновляем содержимое фрейма с таблицей

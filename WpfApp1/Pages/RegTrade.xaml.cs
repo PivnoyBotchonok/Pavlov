@@ -27,7 +27,7 @@ namespace WpfApp1.Pages
             InitializeComponent();
 
             // Заполнение ComboBox риелторами из базы данных
-            RealtorComboBox.ItemsSource = DBEntities.GetContext().Rieltor.ToList();
+            RealtorComboBox.ItemsSource = PavlovEntities.GetContext().Rieltor.ToList();
             RealtorComboBox.DisplayMemberPath = "FIO"; // Указываем, какое свойство отображать
             RealtorComboBox.SelectedValuePath = "ID";  // Указываем, какое свойство использовать для SelectedValue
             RealtorComboBox.SelectedItem = frameMain.CurrentRieltor; // Установка текущего риелтора
@@ -126,19 +126,19 @@ namespace WpfApp1.Pages
             {
                 case 0: // Квартира
                     PropertyComboBox.SelectedIndex = -1;
-                    PropertyComboBox.ItemsSource = DBEntities.GetContext().Flat.ToList(); // Заполняем объектами Flat
+                    PropertyComboBox.ItemsSource = PavlovEntities.GetContext().Flat.ToList(); // Заполняем объектами Flat
                     PropertyComboBox.DisplayMemberPath = "Addres"; // Отображаем адрес
                     PropertyComboBox.SelectedValuePath = "ID";     // Используем Id для SelectedValue
                     break;
                 case 1: // Дом
                     PropertyComboBox.SelectedIndex = -1;
-                    PropertyComboBox.ItemsSource = DBEntities.GetContext().House.ToList(); // Заполняем объектами House
+                    PropertyComboBox.ItemsSource = PavlovEntities.GetContext().House.ToList(); // Заполняем объектами House
                     PropertyComboBox.DisplayMemberPath = "Addres";
                     PropertyComboBox.SelectedValuePath = "ID";
                     break;
                 case 2: // Участок
                     PropertyComboBox.SelectedIndex = -1;
-                    PropertyComboBox.ItemsSource = DBEntities.GetContext().Region.ToList(); // Заполняем объектами Region
+                    PropertyComboBox.ItemsSource = PavlovEntities.GetContext().Region.ToList(); // Заполняем объектами Region
                     PropertyComboBox.DisplayMemberPath = "Addres";
                     PropertyComboBox.SelectedValuePath = "ID";
                     break;
@@ -188,7 +188,7 @@ namespace WpfApp1.Pages
         /// <param name="trade">Объект сделки для добавления.</param>
         private void addTrade(Trade trade)
         {
-            var context = DBEntities.GetContext();
+            var context = PavlovEntities.GetContext();
             context.Trade.Add(trade);
             try
             {

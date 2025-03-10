@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище DBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище PavlovModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ID" />
@@ -72,16 +72,6 @@
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Trade">
           <Key>
@@ -204,14 +194,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Хранилище DBModelContainer">
+        <EntityContainer Name="Хранилище PavlovModelContainer">
           <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Flat" EntityType="Self.Flat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="House" EntityType="Self.House" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Rieltor" EntityType="Self.Rieltor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trade" EntityType="Self.Trade" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Client_Role" Association="Self.FK_Client_Role">
             <End Role="Role" EntitySet="Role" />
@@ -250,73 +239,28 @@
             <End Role="Trade" EntitySet="Trade" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Client" EntityType="DBModel.Client" />
-          <EntitySet Name="Flat" EntityType="DBModel.Flat" />
-          <EntitySet Name="House" EntityType="DBModel.House" />
-          <EntitySet Name="Region" EntityType="DBModel.Region" />
-          <EntitySet Name="Rieltor" EntityType="DBModel.Rieltor" />
-          <EntitySet Name="Role" EntityType="DBModel.Role" />
-          <EntitySet Name="sysdiagrams" EntityType="DBModel.sysdiagrams" />
-          <EntitySet Name="Trade" EntityType="DBModel.Trade" />
-          <AssociationSet Name="FK_Client_Role" Association="DBModel.FK_Client_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Client" EntitySet="Client" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Flat_Client" Association="DBModel.FK_Flat_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Flat" EntitySet="Flat" />
-          </AssociationSet>
-          <AssociationSet Name="FK_House_Client" Association="DBModel.FK_House_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="House" EntitySet="House" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Region_Client" Association="DBModel.FK_Region_Client">
-            <End Role="Client" EntitySet="Client" />
-            <End Role="Region" EntitySet="Region" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Trade_Flat" Association="DBModel.FK_Trade_Flat">
-            <End Role="Flat" EntitySet="Flat" />
-            <End Role="Trade" EntitySet="Trade" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Trade_House" Association="DBModel.FK_Trade_House">
-            <End Role="House" EntitySet="House" />
-            <End Role="Trade" EntitySet="Trade" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Trade_Region" Association="DBModel.FK_Trade_Region">
-            <End Role="Region" EntitySet="Region" />
-            <End Role="Trade" EntitySet="Trade" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Rieltor_Role" Association="DBModel.FK_Rieltor_Role">
-            <End Role="Role" EntitySet="Role" />
-            <End Role="Rieltor" EntitySet="Rieltor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Trade_Rieltor" Association="DBModel.FK_Trade_Rieltor">
-            <End Role="Rieltor" EntitySet="Rieltor" />
-            <End Role="Trade" EntitySet="Trade" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="PavlovModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Client">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <Property Name="SName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Number" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
           <Property Name="Emaill" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Role" Relationship="DBModel.FK_Client_Role" FromRole="Client" ToRole="Role" />
-          <NavigationProperty Name="Flat" Relationship="DBModel.FK_Flat_Client" FromRole="Client" ToRole="Flat" />
-          <NavigationProperty Name="House" Relationship="DBModel.FK_House_Client" FromRole="Client" ToRole="House" />
-          <NavigationProperty Name="Region" Relationship="DBModel.FK_Region_Client" FromRole="Client" ToRole="Region" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Client_Role" FromRole="Client" ToRole="Role" />
+          <NavigationProperty Name="Flat" Relationship="Self.FK_Flat_Client" FromRole="Client" ToRole="Flat" />
+          <NavigationProperty Name="House" Relationship="Self.FK_House_Client" FromRole="Client" ToRole="House" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Region_Client" FromRole="Client" ToRole="Region" />
         </EntityType>
         <EntityType Name="Flat">
           <Key>
@@ -329,8 +273,8 @@
           <Property Name="Floor" Type="Int32" Nullable="false" />
           <Property Name="NumRooms" Type="Int32" Nullable="false" />
           <Property Name="Area" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="DBModel.FK_Flat_Client" FromRole="Flat" ToRole="Client" />
-          <NavigationProperty Name="Trade" Relationship="DBModel.FK_Trade_Flat" FromRole="Flat" ToRole="Trade" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Flat_Client" FromRole="Flat" ToRole="Client" />
+          <NavigationProperty Name="Trade" Relationship="Self.FK_Trade_Flat" FromRole="Flat" ToRole="Trade" />
         </EntityType>
         <EntityType Name="House">
           <Key>
@@ -338,13 +282,13 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClientID" Type="Int32" Nullable="false" />
-          <Property Name="Addres" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Coordinate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Addres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Coordinate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="FloorCount" Type="Int32" Nullable="false" />
           <Property Name="NumRoom" Type="Int32" Nullable="false" />
           <Property Name="Area" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="DBModel.FK_House_Client" FromRole="House" ToRole="Client" />
-          <NavigationProperty Name="Trade" Relationship="DBModel.FK_Trade_House" FromRole="House" ToRole="Trade" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_House_Client" FromRole="House" ToRole="Client" />
+          <NavigationProperty Name="Trade" Relationship="Self.FK_Trade_House" FromRole="House" ToRole="Trade" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -352,11 +296,11 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ClientID" Type="Int32" Nullable="false" />
-          <Property Name="Addres" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Coordinate" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Addres" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Coordinate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Area" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Client" Relationship="DBModel.FK_Region_Client" FromRole="Region" ToRole="Client" />
-          <NavigationProperty Name="Trade" Relationship="DBModel.FK_Trade_Region" FromRole="Region" ToRole="Trade" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Region_Client" FromRole="Region" ToRole="Client" />
+          <NavigationProperty Name="Trade" Relationship="Self.FK_Trade_Region" FromRole="Region" ToRole="Trade" />
         </EntityType>
         <EntityType Name="Rieltor">
           <Key>
@@ -364,33 +308,23 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
-          <Property Name="SName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="PName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Part" Type="Int32" Nullable="false" />
-          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Role" Relationship="DBModel.FK_Rieltor_Role" FromRole="Rieltor" ToRole="Role" />
-          <NavigationProperty Name="Trade" Relationship="DBModel.FK_Trade_Rieltor" FromRole="Rieltor" ToRole="Trade" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Self.FK_Rieltor_Role" FromRole="Rieltor" ToRole="Role" />
+          <NavigationProperty Name="Trade" Relationship="Self.FK_Trade_Rieltor" FromRole="Rieltor" ToRole="Trade" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Client" Relationship="DBModel.FK_Client_Role" FromRole="Role" ToRole="Client" />
-          <NavigationProperty Name="Rieltor" Relationship="DBModel.FK_Rieltor_Role" FromRole="Role" ToRole="Rieltor" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Role" FromRole="Role" ToRole="Client" />
+          <NavigationProperty Name="Rieltor" Relationship="Self.FK_Rieltor_Role" FromRole="Role" ToRole="Rieltor" />
         </EntityType>
         <EntityType Name="Trade">
           <Key>
@@ -402,16 +336,16 @@
           <Property Name="HouseID" Type="Int32" />
           <Property Name="RegionID" Type="Int32" />
           <Property Name="DateTrade" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <Property Name="RieltorPart" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
-          <NavigationProperty Name="Flat" Relationship="DBModel.FK_Trade_Flat" FromRole="Trade" ToRole="Flat" />
-          <NavigationProperty Name="House" Relationship="DBModel.FK_Trade_House" FromRole="Trade" ToRole="House" />
-          <NavigationProperty Name="Region" Relationship="DBModel.FK_Trade_Region" FromRole="Trade" ToRole="Region" />
-          <NavigationProperty Name="Rieltor" Relationship="DBModel.FK_Trade_Rieltor" FromRole="Trade" ToRole="Rieltor" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="RieltorPart" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Flat" Relationship="Self.FK_Trade_Flat" FromRole="Trade" ToRole="Flat" />
+          <NavigationProperty Name="House" Relationship="Self.FK_Trade_House" FromRole="Trade" ToRole="House" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Trade_Region" FromRole="Trade" ToRole="Region" />
+          <NavigationProperty Name="Rieltor" Relationship="Self.FK_Trade_Rieltor" FromRole="Trade" ToRole="Rieltor" />
         </EntityType>
         <Association Name="FK_Client_Role">
-          <End Type="DBModel.Role" Role="Role" Multiplicity="1" />
-          <End Type="DBModel.Client" Role="Client" Multiplicity="*" />
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="ID" />
@@ -422,8 +356,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Flat_Client">
-          <End Type="DBModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="DBModel.Flat" Role="Flat" Multiplicity="*" />
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Flat" Type="Self.Flat" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
               <PropertyRef Name="ID" />
@@ -434,8 +368,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_House_Client">
-          <End Type="DBModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="DBModel.House" Role="House" Multiplicity="*" />
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="House" Type="Self.House" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
               <PropertyRef Name="ID" />
@@ -446,8 +380,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Region_Client">
-          <End Type="DBModel.Client" Role="Client" Multiplicity="1" />
-          <End Type="DBModel.Region" Role="Region" Multiplicity="*" />
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="Region" Type="Self.Region" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Client">
               <PropertyRef Name="ID" />
@@ -458,8 +392,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Trade_Flat">
-          <End Type="DBModel.Flat" Role="Flat" Multiplicity="0..1" />
-          <End Type="DBModel.Trade" Role="Trade" Multiplicity="*" />
+          <End Role="Flat" Type="Self.Flat" Multiplicity="0..1" />
+          <End Role="Trade" Type="Self.Trade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Flat">
               <PropertyRef Name="ID" />
@@ -470,8 +404,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Trade_House">
-          <End Type="DBModel.House" Role="House" Multiplicity="0..1" />
-          <End Type="DBModel.Trade" Role="Trade" Multiplicity="*" />
+          <End Role="House" Type="Self.House" Multiplicity="0..1" />
+          <End Role="Trade" Type="Self.Trade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="House">
               <PropertyRef Name="ID" />
@@ -482,8 +416,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Trade_Region">
-          <End Type="DBModel.Region" Role="Region" Multiplicity="0..1" />
-          <End Type="DBModel.Trade" Role="Trade" Multiplicity="*" />
+          <End Role="Region" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="Trade" Type="Self.Trade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Region">
               <PropertyRef Name="ID" />
@@ -494,8 +428,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Rieltor_Role">
-          <End Type="DBModel.Role" Role="Role" Multiplicity="1" />
-          <End Type="DBModel.Rieltor" Role="Rieltor" Multiplicity="*" />
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Rieltor" Type="Self.Rieltor" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
               <PropertyRef Name="ID" />
@@ -506,8 +440,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Trade_Rieltor">
-          <End Type="DBModel.Rieltor" Role="Rieltor" Multiplicity="1" />
-          <End Type="DBModel.Trade" Role="Trade" Multiplicity="*" />
+          <End Role="Rieltor" Type="Self.Rieltor" Multiplicity="1" />
+          <End Role="Trade" Type="Self.Trade" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Rieltor">
               <PropertyRef Name="ID" />
@@ -517,108 +451,142 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        </Schema>
+        <EntityContainer Name="PavlovEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Flat" EntityType="Self.Flat" />
+          <EntitySet Name="House" EntityType="Self.House" />
+          <EntitySet Name="Region" EntityType="Self.Region" />
+          <EntitySet Name="Rieltor" EntityType="Self.Rieltor" />
+          <EntitySet Name="Role" EntityType="Self.Role" />
+          <EntitySet Name="Trade" EntityType="Self.Trade" />
+          <AssociationSet Name="FK_Client_Role" Association="Self.FK_Client_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Flat_Client" Association="Self.FK_Flat_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Flat" EntitySet="Flat" />
+          </AssociationSet>
+          <AssociationSet Name="FK_House_Client" Association="Self.FK_House_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="House" EntitySet="House" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Region_Client" Association="Self.FK_Region_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Region" EntitySet="Region" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trade_Flat" Association="Self.FK_Trade_Flat">
+            <End Role="Flat" EntitySet="Flat" />
+            <End Role="Trade" EntitySet="Trade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trade_House" Association="Self.FK_Trade_House">
+            <End Role="House" EntitySet="House" />
+            <End Role="Trade" EntitySet="Trade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trade_Region" Association="Self.FK_Trade_Region">
+            <End Role="Region" EntitySet="Region" />
+            <End Role="Trade" EntitySet="Trade" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rieltor_Role" Association="Self.FK_Rieltor_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Rieltor" EntitySet="Rieltor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trade_Rieltor" Association="Self.FK_Trade_Rieltor">
+            <End Role="Rieltor" EntitySet="Rieltor" />
+            <End Role="Trade" EntitySet="Trade" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище DBModelContainer" CdmEntityContainer="DBEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище PavlovModelContainer" CdmEntityContainer="PavlovEntities">
           <EntitySetMapping Name="Client">
-            <EntityTypeMapping TypeName="DBModel.Client">
+            <EntityTypeMapping TypeName="PavlovModel.Client">
               <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Emaill" ColumnName="Emaill" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="PName" ColumnName="PName" />
-                <ScalarProperty Name="FName" ColumnName="FName" />
-                <ScalarProperty Name="SName" ColumnName="SName" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="SName" ColumnName="SName" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Emaill" ColumnName="Emaill" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Flat">
-            <EntityTypeMapping TypeName="DBModel.Flat">
+            <EntityTypeMapping TypeName="PavlovModel.Flat">
               <MappingFragment StoreEntitySet="Flat">
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="NumRooms" ColumnName="NumRooms" />
-                <ScalarProperty Name="Floor" ColumnName="Floor" />
-                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
-                <ScalarProperty Name="Addres" ColumnName="Addres" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Addres" ColumnName="Addres" />
+                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="NumRooms" ColumnName="NumRooms" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="House">
-            <EntityTypeMapping TypeName="DBModel.House">
+            <EntityTypeMapping TypeName="PavlovModel.House">
               <MappingFragment StoreEntitySet="House">
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="NumRoom" ColumnName="NumRoom" />
-                <ScalarProperty Name="FloorCount" ColumnName="FloorCount" />
-                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
-                <ScalarProperty Name="Addres" ColumnName="Addres" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Addres" ColumnName="Addres" />
+                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+                <ScalarProperty Name="FloorCount" ColumnName="FloorCount" />
+                <ScalarProperty Name="NumRoom" ColumnName="NumRoom" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Region">
-            <EntityTypeMapping TypeName="DBModel.Region">
+            <EntityTypeMapping TypeName="PavlovModel.Region">
               <MappingFragment StoreEntitySet="Region">
-                <ScalarProperty Name="Area" ColumnName="Area" />
-                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
-                <ScalarProperty Name="Addres" ColumnName="Addres" />
-                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Addres" ColumnName="Addres" />
+                <ScalarProperty Name="Coordinate" ColumnName="Coordinate" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Rieltor">
-            <EntityTypeMapping TypeName="DBModel.Rieltor">
+            <EntityTypeMapping TypeName="PavlovModel.Rieltor">
               <MappingFragment StoreEntitySet="Rieltor">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Login" ColumnName="Login" />
-                <ScalarProperty Name="Part" ColumnName="Part" />
-                <ScalarProperty Name="PName" ColumnName="PName" />
-                <ScalarProperty Name="FName" ColumnName="FName" />
-                <ScalarProperty Name="SName" ColumnName="SName" />
-                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="SName" ColumnName="SName" />
+                <ScalarProperty Name="FName" ColumnName="FName" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="Part" ColumnName="Part" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Role">
-            <EntityTypeMapping TypeName="DBModel.Role">
+            <EntityTypeMapping TypeName="PavlovModel.Role">
               <MappingFragment StoreEntitySet="Role">
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="DBModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Trade">
-            <EntityTypeMapping TypeName="DBModel.Trade">
+            <EntityTypeMapping TypeName="PavlovModel.Trade">
               <MappingFragment StoreEntitySet="Trade">
-                <ScalarProperty Name="RieltorPart" ColumnName="RieltorPart" />
-                <ScalarProperty Name="Amount" ColumnName="Amount" />
-                <ScalarProperty Name="DateTrade" ColumnName="DateTrade" />
-                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
-                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
-                <ScalarProperty Name="FlatID" ColumnName="FlatID" />
-                <ScalarProperty Name="RieltorID" ColumnName="RieltorID" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RieltorID" ColumnName="RieltorID" />
+                <ScalarProperty Name="FlatID" ColumnName="FlatID" />
+                <ScalarProperty Name="HouseID" ColumnName="HouseID" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="DateTrade" ColumnName="DateTrade" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="RieltorPart" ColumnName="RieltorPart" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -26,7 +26,7 @@ namespace WpfApp1.Pages.Tables
             InitializeComponent();
 
             // Загрузка данных о домах в DataGrid
-            dataGrid.ItemsSource = DBEntities.GetContext().House.ToList();
+            dataGrid.ItemsSource = PavlovEntities.GetContext().House.ToList();
         }
 
         /// <summary>
@@ -53,16 +53,16 @@ namespace WpfApp1.Pages.Tables
                 try
                 {
                     // Удаляем выбранные элементы из контекста базы данных
-                    DBEntities.GetContext().House.RemoveRange(itemsForRemoving);
+                    PavlovEntities.GetContext().House.RemoveRange(itemsForRemoving);
 
                     // Сохраняем изменения в базе данных
-                    DBEntities.GetContext().SaveChanges();
+                    PavlovEntities.GetContext().SaveChanges();
 
                     // Уведомляем пользователя об успешном удалении
                     MessageBox.Show("Данные удалены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     // Обновляем источник данных для DataGrid
-                    dataGrid.ItemsSource = DBEntities.GetContext().House.ToList();
+                    dataGrid.ItemsSource = PavlovEntities.GetContext().House.ToList();
                 }
                 catch (Exception ex)
                 {
@@ -99,7 +99,7 @@ namespace WpfApp1.Pages.Tables
         {
             if (Visibility == Visibility.Visible) // Если страница стала видимой
             {
-                var context = DBEntities.GetContext();
+                var context = PavlovEntities.GetContext();
                 context.ChangeTracker.Entries().ToList().ForEach(entry => entry.Reload()); // Перезагружаем данные
                 dataGrid.ItemsSource = context.House.ToList(); // Обновляем источник данных для DataGrid
             }

@@ -13,17 +13,16 @@ namespace WpfApp1.AppData
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DBEntities : DbContext
+    public partial class PavlovEntities : DbContext
     {
-        private static DBEntities _context;
-        public DBEntities()
-            : base("name=DBEntities")
+        private static PavlovEntities _context;
+        public PavlovEntities()
+            : base("name=PavlovEntities")
         {
         }
-
-        public static DBEntities GetContext() 
+        public static PavlovEntities GetContext() 
         {
-            if (_context == null) _context = new DBEntities();
+            if (_context == null) _context = new PavlovEntities();
             return _context;
         }
     
@@ -38,7 +37,6 @@ namespace WpfApp1.AppData
         public virtual DbSet<Region> Region { get; set; }
         public virtual DbSet<Rieltor> Rieltor { get; set; }
         public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Trade> Trade { get; set; }
     }
 }

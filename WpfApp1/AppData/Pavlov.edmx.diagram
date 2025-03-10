@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c074f46e3b024f3ca5e6d07dad24a47d" Name="Diagram1">
+        <EntityTypeShape EntityType="PavlovModel.Client" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavlovModel.Flat" Width="1.5" PointX="5.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavlovModel.House" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavlovModel.Region" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavlovModel.Rieltor" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavlovModel.Role" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PavlovModel.Trade" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
+        <AssociationConnector Association="PavlovModel.FK_Client_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="PavlovModel.FK_Flat_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="PavlovModel.FK_House_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="PavlovModel.FK_Region_Client" ManuallyRouted="false" />
+        <AssociationConnector Association="PavlovModel.FK_Trade_Flat" ManuallyRouted="false" />
+        <AssociationConnector Association="PavlovModel.FK_Trade_House" ManuallyRouted="false" />
+        <AssociationConnector Association="PavlovModel.FK_Trade_Region" ManuallyRouted="false" />
+        <AssociationConnector Association="PavlovModel.FK_Rieltor_Role" ManuallyRouted="false" />
+        <AssociationConnector Association="PavlovModel.FK_Trade_Rieltor" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

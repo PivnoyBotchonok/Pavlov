@@ -80,44 +80,41 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppData\Client.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Pavlov.tt</DependentUpon>
     </Compile>
     <Compile Include="AppData\Flat.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Pavlov.tt</DependentUpon>
     </Compile>
     <Compile Include="AppData\frameMain.cs" />
     <Compile Include="AppData\House.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Pavlov.tt</DependentUpon>
     </Compile>
-    <Compile Include="AppData\Model1.Context.cs">
+    <Compile Include="AppData\Pavlov.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DependentUpon>Pavlov.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="AppData\Model1.cs">
+    <Compile Include="AppData\Pavlov.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Pavlov.tt</DependentUpon>
     </Compile>
-    <Compile Include="AppData\Model1.Designer.cs">
+    <Compile Include="AppData\Pavlov.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>Pavlov.edmx</DependentUpon>
     </Compile>
     <Compile Include="AppData\Region.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Pavlov.tt</DependentUpon>
     </Compile>
     <Compile Include="AppData\Rieltor.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Pavlov.tt</DependentUpon>
     </Compile>
     <Compile Include="AppData\Role.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="AppData\sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Pavlov.tt</DependentUpon>
     </Compile>
     <Compile Include="AppData\Trade.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>Pavlov.tt</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -219,12 +216,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="AppData\Model1.edmx">
+    <EntityDeploy Include="AppData\Pavlov.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>Pavlov.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="AppData\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <None Include="AppData\Pavlov.edmx.diagram">
+      <DependentUpon>Pavlov.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -236,19 +233,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AppData\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="AppData\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="AppData\Pavlov.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Pavlov.edmx</DependentUpon>
+      <LastGenOutput>Pavlov.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="AppData\Pavlov.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Pavlov.edmx</DependentUpon>
+      <LastGenOutput>Pavlov.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

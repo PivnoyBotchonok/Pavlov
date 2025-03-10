@@ -26,7 +26,7 @@ namespace WpfApp1.Pages
             InitializeComponent();
 
             // Загрузка данных риелторов в DataGrid
-            dataGrid.ItemsSource = DBEntities.GetContext().Rieltor.ToList();
+            dataGrid.ItemsSource = PavlovEntities.GetContext().Rieltor.ToList();
         }
 
         /// <summary>
@@ -63,16 +63,16 @@ namespace WpfApp1.Pages
                 try
                 {
                     // Удаляем выбранные элементы из контекста базы данных
-                    DBEntities.GetContext().Rieltor.RemoveRange(itemsForRemoving);
+                    PavlovEntities.GetContext().Rieltor.RemoveRange(itemsForRemoving);
 
                     // Сохраняем изменения в базе данных
-                    DBEntities.GetContext().SaveChanges();
+                    PavlovEntities.GetContext().SaveChanges();
 
                     // Уведомляем пользователя об успешном удалении
                     MessageBox.Show("Данные удалены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     // Обновляем источник данных для DataGrid
-                    dataGrid.ItemsSource = DBEntities.GetContext().Rieltor.ToList();
+                    dataGrid.ItemsSource = PavlovEntities.GetContext().Rieltor.ToList();
                 }
                 catch (Exception ex)
                 {

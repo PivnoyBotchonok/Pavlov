@@ -42,7 +42,7 @@ namespace WpfApp1.Pages
             InitializeComponent();
 
             // Заполнение ComboBox владельцами из базы данных
-            Owner_cmbBox.ItemsSource = DBEntities.GetContext().Client.ToList();
+            Owner_cmbBox.ItemsSource = PavlovEntities.GetContext().Client.ToList();
             Owner_cmbBox.DisplayMemberPath = "FIO"; // Указываем, какое свойство отображать
             Owner_cmbBox.SelectedValuePath = "ID"; // Указываем, какое свойство использовать как значение
 
@@ -202,7 +202,7 @@ namespace WpfApp1.Pages
         /// </summary>
         private void AddFlat()
         {
-            var context = DBEntities.GetContext();
+            var context = PavlovEntities.GetContext();
             if (context == null)
             {
                 MessageBox.Show("Ошибка: контекст базы данных не инициализирован.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -243,7 +243,7 @@ namespace WpfApp1.Pages
         /// </summary>
         private void EditFlat()
         {
-            var context = DBEntities.GetContext();
+            var context = PavlovEntities.GetContext();
 
             // Обновление данных квартиры
             _flat.ClientID = (int)Owner_cmbBox.SelectedValue;
@@ -371,7 +371,7 @@ namespace WpfApp1.Pages
         /// </summary>
         private void AddHouse()
         {
-            var context = DBEntities.GetContext();
+            var context = PavlovEntities.GetContext();
             if (context == null)
             {
                 MessageBox.Show("Ошибка: контекст базы данных не инициализирован.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -412,7 +412,7 @@ namespace WpfApp1.Pages
         /// </summary>
         private void EditHouse()
         {
-            var context = DBEntities.GetContext();
+            var context = PavlovEntities.GetContext();
 
             // Обновление данных дома
             _house.ClientID = (int)Owner_cmbBox.SelectedValue;
@@ -444,7 +444,7 @@ namespace WpfApp1.Pages
         /// </summary>
         private void AddRegion()
         {
-            var context = DBEntities.GetContext();
+            var context = PavlovEntities.GetContext();
             if (context == null)
             {
                 MessageBox.Show("Ошибка: контекст базы данных не инициализирован.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -483,7 +483,7 @@ namespace WpfApp1.Pages
         /// </summary>
         private void EditRegion()
         {
-            var context = DBEntities.GetContext();
+            var context = PavlovEntities.GetContext();
 
             // Обновление данных участка
             _region.ClientID = (int)Owner_cmbBox.SelectedValue;

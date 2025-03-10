@@ -48,9 +48,9 @@ namespace WpfApp1.Pages
         private void EntryBut_Click(object sender, RoutedEventArgs e)
         {
             // Поиск клиента в базе данных по логину и паролю
-            var checkClient = DBEntities.GetContext().Client.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
+            var checkClient = PavlovEntities.GetContext().Client.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
             // Поиск риелтора в базе данных по логину и паролю
-            var checkRieltor = DBEntities.GetContext().Rieltor.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
+            var checkRieltor = PavlovEntities.GetContext().Rieltor.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
 
             if (checkClient != null)
             {
@@ -116,9 +116,9 @@ namespace WpfApp1.Pages
                         Password.Text = password;
 
                         // Поиск клиента в базе данных по логину и паролю
-                        var checkClient = DBEntities.GetContext().Client.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
+                        var checkClient = PavlovEntities.GetContext().Client.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
                         // Поиск риелтора в базе данных по логину и паролю
-                        var checkRieltor = DBEntities.GetContext().Rieltor.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
+                        var checkRieltor = PavlovEntities.GetContext().Rieltor.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
 
                         if (checkClient != null)
                         {

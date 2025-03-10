@@ -26,7 +26,7 @@ namespace WpfApp1.Pages
             InitializeComponent();
 
             // Загрузка данных клиентов в DataGrid
-            dataGrid.ItemsSource = DBEntities.GetContext().Client.ToList();
+            dataGrid.ItemsSource = PavlovEntities.GetContext().Client.ToList();
         }
 
         /// <summary>
@@ -63,16 +63,16 @@ namespace WpfApp1.Pages
                 try
                 {
                     // Удаляем выбранные элементы из контекста базы данных
-                    DBEntities.GetContext().Client.RemoveRange(itemsForRemoving);
+                    PavlovEntities.GetContext().Client.RemoveRange(itemsForRemoving);
 
                     // Сохраняем изменения в базе данных
-                    DBEntities.GetContext().SaveChanges();
+                    PavlovEntities.GetContext().SaveChanges();
 
                     // Уведомляем пользователя об успешном удалении
                     MessageBox.Show("Данные удалены", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     // Обновляем источник данных для DataGrid
-                    dataGrid.ItemsSource = DBEntities.GetContext().Client.ToList();
+                    dataGrid.ItemsSource = PavlovEntities.GetContext().Client.ToList();
                 }
                 catch (Exception ex)
                 {

@@ -11,8 +11,7 @@ namespace WpfApp1.AppData
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-
+    
     public partial class Trade
     {
         public int ID { get; set; }
@@ -23,11 +22,7 @@ namespace WpfApp1.AppData
         public System.DateTime DateTrade { get; set; }
         public decimal Amount { get; set; }
         public decimal RieltorPart { get; set; }
-        /// <summary>
-        /// Свойство, возвращающее строку с информацией о выбранном объекте недвижимости.
-        /// В зависимости от типа объекта (квартира, дом или участок), возвращает адрес объекта.
-        /// Если объект не выбран, возвращает сообщение "Объект недвижимости не выбран".
-        /// </summary>
+
         public string Object
         {
             get
