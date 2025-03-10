@@ -23,28 +23,33 @@ namespace WpfApp1.AppData
         public System.DateTime DateTrade { get; set; }
         public decimal Amount { get; set; }
         public decimal RieltorPart { get; set; }
-        public string Object 
+        /// <summary>
+        /// Свойство, возвращающее строку с информацией о выбранном объекте недвижимости.
+        /// В зависимости от типа объекта (квартира, дом или участок), возвращает адрес объекта.
+        /// Если объект не выбран, возвращает сообщение "Объект недвижимости не выбран".
+        /// </summary>
+        public string Object
         {
-            get 
+            get
             {
-                if(FlatID != null) 
+                if (FlatID != null) // Если выбран объект типа "Квартира"
                 {
-                    return $"Квартира, {Flat.Addres}";
+                    return $"Квартира, {Flat.Addres}"; // Возвращает адрес квартиры
                 }
-                else if (HouseID != null && House != null)
+                else if (HouseID != null && House != null) // Если выбран объект типа "Дом"
                 {
-                    return $"Дом, {House.Addres}";
+                    return $"Дом, {House.Addres}"; // Возвращает адрес дома
                 }
-                else if (RegionID != null && Region != null)
+                else if (RegionID != null && Region != null) // Если выбран объект типа "Участок"
                 {
-                    return $"Участок, {Region.Addres}";
+                    return $"Участок, {Region.Addres}"; // Возвращает адрес участка
                 }
-                else
+                else // Если объект не выбран
                 {
-                    return "Объект недвижимости не выбран";
+                    return "Объект недвижимости не выбран"; // Возвращает сообщение об отсутствии выбора
                 }
             }
-        } 
+        }
 
         public virtual Flat Flat { get; set; }
         public virtual House House { get; set; }

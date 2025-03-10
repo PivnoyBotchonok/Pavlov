@@ -25,26 +25,33 @@ namespace WpfApp1.Pages
         public RegTrade()
         {
             InitializeComponent();
+
+            // Заполнение ComboBox риелторами из базы данных
             RealtorComboBox.ItemsSource = DBEntities.GetContext().Rieltor.ToList();
             RealtorComboBox.DisplayMemberPath = "FIO"; // Указываем, какое свойство отображать
             RealtorComboBox.SelectedValuePath = "ID";  // Указываем, какое свойство использовать для SelectedValue
-            RealtorComboBox.SelectedItem = frameMain.CurrentRieltor;
+            RealtorComboBox.SelectedItem = frameMain.CurrentRieltor; // Установка текущего риелтора
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Зарегистрировать сделку".
+        /// Валидирует данные и сохраняет сделку в базу данных.
+        /// </summary>
         private void regBut_Click(object sender, RoutedEventArgs e)
         {
             // Проверка выбора риелтора
             var selectedRealtor = RealtorComboBox.SelectedItem as Rieltor;
             if (selectedRealtor == null)
             {
-                MessageBox.Show("Выберите риелтора");
+                MessageBox.Show("Выберите риелтора", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             int rieltorId = selectedRealtor.ID;
+
             // Проверка выбора объекта недвижимости
             if (PropertyComboBox.SelectedValue == null)
             {
-                MessageBox.Show("Выберите объект недвижимости");
+                MessageBox.Show("Выберите объект недвижимости", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -55,14 +62,14 @@ namespace WpfApp1.Pages
             string commissionText = CommissionTextBlock.Text.Replace("Отчисление: ", "").Replace("₽", "").Trim();
             if (!decimal.TryParse(commissionText, out decimal commission))
             {
-                MessageBox.Show("Некорректное значение отчисления");
+                MessageBox.Show("Некорректное значение отчисления", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
             // Проверка даты
             if (DatePicker.SelectedDate == null)
             {
-                MessageBox.Show("Выберите дату сделки");
+                MessageBox.Show("Выберите дату сделки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             DateTime dateTrade = DatePicker.SelectedDate.Value;
@@ -70,7 +77,7 @@ namespace WpfApp1.Pages
             // Проверка суммы сделки
             if (!decimal.TryParse(AmountTextBox.Text, out decimal amount))
             {
-                MessageBox.Show("Некорректная сумма сделки");
+                MessageBox.Show("Некорректная сумма сделки", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -101,7 +108,7 @@ namespace WpfApp1.Pages
                     trade.RegionID = propertyId;
                     break;
                 default:
-                    MessageBox.Show("Выберите тип недвижимости");
+                    MessageBox.Show("Выберите тип недвижимости", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
             }
 
@@ -109,6 +116,10 @@ namespace WpfApp1.Pages
             addTrade(trade);
         }
 
+        /// <summary>
+        /// Обработчик изменения выбранного элемента в ComboBox типа недвижимости.
+        /// Заполняет ComboBox объектами недвижимости в зависимости от выбранного типа.
+        /// </summary>
         private void TypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             switch (TypeComboBox.SelectedIndex)
@@ -118,7 +129,6 @@ namespace WpfApp1.Pages
                     PropertyComboBox.ItemsSource = DBEntities.GetContext().Flat.ToList(); // Заполняем объектами Flat
                     PropertyComboBox.DisplayMemberPath = "Addres"; // Отображаем адрес
                     PropertyComboBox.SelectedValuePath = "ID";     // Используем Id для SelectedValue
-                    
                     break;
                 case 1: // Дом
                     PropertyComboBox.SelectedIndex = -1;
@@ -133,8 +143,12 @@ namespace WpfApp1.Pages
                     PropertyComboBox.SelectedValuePath = "ID";
                     break;
             }
-
         }
+
+        /// <summary>
+        /// Обработчик изменения текста в поле "Сумма сделки".
+        /// Рассчитывает отчисление риелтора и обновляет TextBlock.
+        /// </summary>
         private void AmountTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             var selectedRealtor = RealtorComboBox.SelectedItem as Rieltor;
@@ -167,7 +181,12 @@ namespace WpfApp1.Pages
                 CommissionTextBlock.Text = "Отчисление: Некорректная сумма";
             }
         }
-        private void addTrade(Trade trade) 
+
+        /// <summary>
+        /// Добавляет сделку в базу данных.
+        /// </summary>
+        /// <param name="trade">Объект сделки для добавления.</param>
+        private void addTrade(Trade trade)
         {
             var context = DBEntities.GetContext();
             context.Trade.Add(trade);
@@ -175,29 +194,29 @@ namespace WpfApp1.Pages
             {
                 // Сохранение изменений в базе данных
                 context.SaveChanges();
-                MessageBox.Show("Регистрация прошла успешно");
-                frameMain.frame.GoBack();
+                MessageBox.Show("Регистрация прошла успешно", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                frameMain.frame.GoBack(); // Возврат на предыдущую страницу
             }
             catch (DbUpdateException ex)
             {
-                Console.WriteLine("Ошибка при сохранении изменений в базе данных: " + ex.Message);
-                if (ex.InnerException != null)
-                {
-                    Console.WriteLine("InnerException: " + ex.InnerException.Message);
-                }
+                MessageBox.Show($"Ошибка при сохранении изменений в базе данных: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Произошла ошибка: " + ex.Message);
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        /// <summary>
+        /// Обработчик ввода текста в поле с цифрами.
+        /// Разрешает ввод только цифр.
+        /// </summary>
         private void Number_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            // Проверка, является ли вводимый символ цифрой
-            if (!char.IsDigit(e.Text, 0))
+            if (!char.IsDigit(e.Text, 0)) // Проверка, является ли вводимый символ цифрой
             {
                 e.Handled = true; // Отменяем ввод, если символ не цифра
             }
         }
-    } 
+    }
 }

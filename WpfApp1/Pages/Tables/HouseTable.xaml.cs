@@ -24,9 +24,15 @@ namespace WpfApp1.Pages.Tables
         public HouseTable()
         {
             InitializeComponent();
+
+            // Загрузка данных о домах в DataGrid
             dataGrid.ItemsSource = DBEntities.GetContext().House.ToList();
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Удалить".
+        /// Удаление выбранных домов из базы данных.
+        /// </summary>
         private void delBut_Click(object sender, RoutedEventArgs e)
         {
             // Получаем выбранные элементы для удаления из DataGrid
@@ -35,6 +41,7 @@ namespace WpfApp1.Pages.Tables
             // Проверяем, есть ли выбранные элементы
             if (itemsForRemoving.Count == 0)
             {
+                // Вывод сообщения, если не выбрано ни одного элемента
                 MessageBox.Show("Не выбрано ни одного элемента для удаления.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
@@ -65,23 +72,36 @@ namespace WpfApp1.Pages.Tables
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Добавить".
+        /// Переход на страницу регистрации нового дома.
+        /// </summary>
         private void addBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new RegObjectPage(null));
+            frameMain.frame.Navigate(new RegObjectPage(null)); // Переход на страницу регистрации
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Редактировать".
+        /// Переход на страницу редактирования выбранного дома.
+        /// </summary>
         private void editBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new RegObjectPage(null,(sender as Button).DataContext as House, null));
+            // Переход на страницу редактирования с передачей выбранного дома
+            frameMain.frame.Navigate(new RegObjectPage(null, (sender as Button).DataContext as House, null));
         }
 
+        /// <summary>
+        /// Обработчик изменения видимости страницы.
+        /// При отображении страницы обновляет данные в DataGrid.
+        /// </summary>
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (Visibility == Visibility.Visible)
+            if (Visibility == Visibility.Visible) // Если страница стала видимой
             {
                 var context = DBEntities.GetContext();
-                context.ChangeTracker.Entries().ToList().ForEach(entry => entry.Reload());
-                dataGrid.ItemsSource = context.House.ToList();
+                context.ChangeTracker.Entries().ToList().ForEach(entry => entry.Reload()); // Перезагружаем данные
+                dataGrid.ItemsSource = context.House.ToList(); // Обновляем источник данных для DataGrid
             }
         }
     }

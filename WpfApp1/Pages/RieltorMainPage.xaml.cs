@@ -24,15 +24,25 @@ namespace WpfApp1.Pages
         public RieltorMainPage()
         {
             InitializeComponent();
+
+            // Загрузка данных риелторов в DataGrid
             dataGrid.ItemsSource = DBEntities.GetContext().Rieltor.ToList();
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Добавить".
+        /// Переход на страницу регистрации нового риелтора.
+        /// </summary>
         private void addBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.isRieltor = true;
-            frameMain.frame.Navigate(new RegPage(null));
+            frameMain.isRieltor = true; // Устанавливаем флаг, что добавляется риелтор
+            frameMain.frame.Navigate(new RegPage(null)); // Переход на страницу регистрации
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Удалить".
+        /// Удаление выбранных риелторов из базы данных.
+        /// </summary>
         private void delBut_Click(object sender, RoutedEventArgs e)
         {
             // Получаем выбранные элементы для удаления из DataGrid
@@ -41,6 +51,7 @@ namespace WpfApp1.Pages
             // Проверяем, есть ли выбранные элементы
             if (itemsForRemoving.Count == 0)
             {
+                // Вывод сообщения, если не выбрано ни одного элемента
                 MessageBox.Show("Не выбрано ни одного элемента для удаления.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
@@ -71,23 +82,41 @@ namespace WpfApp1.Pages
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Редактировать".
+        /// Переход на страницу редактирования выбранного риелтора.
+        /// </summary>
         private void editBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new RegPage(null,(sender as Button).DataContext as Rieltor));
+            // Переход на страницу регистрации с передачей выбранного риелтора для редактирования
+            frameMain.frame.Navigate(new RegPage(null, (sender as Button).DataContext as Rieltor));
         }
+
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Назад".
+        /// Возврат на страницу входа в систему.
+        /// </summary>
         private void backBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new LogPage());
+            frameMain.frame.Navigate(new LogPage()); // Переход на страницу входа
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Объекты".
+        /// Переход на страницу объектов недвижимости.
+        /// </summary>
         private void ObjectBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new ObjectPage());
+            frameMain.frame.Navigate(new ObjectPage()); // Переход на страницу объектов
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Торговля".
+        /// Переход на страницу торговли.
+        /// </summary>
         private void TradeBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new TradePage());
+            frameMain.frame.Navigate(new TradePage()); // Переход на страницу торговли
         }
     }
 }

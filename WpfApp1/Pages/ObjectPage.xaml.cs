@@ -24,45 +24,69 @@ namespace WpfApp1.Pages
     {
         public ObjectPage()
         {
-            InitializeComponent();
+            InitializeComponent(); // Инициализация компонентов страницы
         }
+
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Назад".
+        /// Возвращает пользователя на предыдущую страницу.
+        /// </summary>
         private void backBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.GoBack();
+            frameMain.frame.GoBack(); // Переход на предыдущую страницу
         }
+
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Торговля".
+        /// Переход на страницу торговли.
+        /// </summary>
         private void TradeBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new TradePage());
+            frameMain.frame.Navigate(new TradePage()); // Переход на страницу TradePage
         }
+
+        /// <summary>
+        /// Обработчик изменения выбранного элемента в ComboBox.
+        /// В зависимости от выбранного элемента загружает соответствующую таблицу.
+        /// </summary>
         private void Object_cmbBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (Object_cmbBox.SelectedIndex == 0)
+            if (Object_cmbBox.SelectedIndex == 0) // Если выбран "Квартиры"
             {
-                frameTable.Navigate(new FlatTable());
-
+                frameTable.Navigate(new FlatTable()); // Загрузка таблицы квартир
             }
-            else if (Object_cmbBox.SelectedIndex == 1)
+            else if (Object_cmbBox.SelectedIndex == 1) // Если выбран "Дома"
             {
-                frameTable.Navigate(new HouseTable());
+                frameTable.Navigate(new HouseTable()); // Загрузка таблицы домов
             }
-            else if (Object_cmbBox.SelectedIndex == 2)
+            else if (Object_cmbBox.SelectedIndex == 2) // Если выбран "Регионы"
             {
-                frameTable.Navigate(new RegionTable());
+                frameTable.Navigate(new RegionTable()); // Загрузка таблицы регионов
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Риелторы".
+        /// Переход на главную страницу риелторов.
+        /// </summary>
         private void RieltorBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new RieltorMainPage());
+            frameMain.frame.Navigate(new RieltorMainPage()); // Переход на страницу RieltorMainPage
         }
 
+        /// <summary>
+        /// Обработчик изменения видимости страницы.
+        /// При отображении страницы обновляет данные в таблице.
+        /// </summary>
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (Visibility == Visibility.Visible)
+            if (Visibility == Visibility.Visible) // Если страница стала видимой
             {
                 // Перезагружаем данные из базы данных
                 var context = DBEntities.GetContext();
                 context.ChangeTracker.Entries().ToList().ForEach(entry => entry.Reload());
+
+                // Обновляем содержимое фрейма с таблицей
                 frameTable.Refresh();
             }
         }

@@ -24,14 +24,24 @@ namespace WpfApp1.Pages.Tables
         public RegionTable()
         {
             InitializeComponent();
+
+            // Загрузка данных об участках в DataGrid
             dataGrid.ItemsSource = DBEntities.GetContext().Region.ToList();
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Добавить".
+        /// Переход на страницу регистрации нового участка.
+        /// </summary>
         private void addBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new RegObjectPage(null));
+            frameMain.frame.Navigate(new RegObjectPage(null)); // Переход на страницу регистрации
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Удалить".
+        /// Удаление выбранных участков из базы данных.
+        /// </summary>
         private void delBut_Click(object sender, RoutedEventArgs e)
         {
             // Получаем выбранные элементы для удаления из DataGrid
@@ -40,6 +50,7 @@ namespace WpfApp1.Pages.Tables
             // Проверяем, есть ли выбранные элементы
             if (itemsForRemoving.Count == 0)
             {
+                // Вывод сообщения, если не выбрано ни одного элемента
                 MessageBox.Show("Не выбрано ни одного элемента для удаления.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
@@ -70,18 +81,27 @@ namespace WpfApp1.Pages.Tables
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Редактировать".
+        /// Переход на страницу редактирования выбранного участка.
+        /// </summary>
         private void editBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new RegObjectPage(null,null,(sender as Button).DataContext as Region));
+            // Переход на страницу редактирования с передачей выбранного участка
+            frameMain.frame.Navigate(new RegObjectPage(null, null, (sender as Button).DataContext as Region));
         }
 
+        /// <summary>
+        /// Обработчик изменения видимости страницы.
+        /// При отображении страницы обновляет данные в DataGrid.
+        /// </summary>
         private void Page_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            if (Visibility == Visibility.Visible)
+            if (Visibility == Visibility.Visible) // Если страница стала видимой
             {
                 var context = DBEntities.GetContext();
-                context.ChangeTracker.Entries().ToList().ForEach(entry => entry.Reload());
-                dataGrid.ItemsSource = context.Region.ToList();
+                context.ChangeTracker.Entries().ToList().ForEach(entry => entry.Reload()); // Перезагружаем данные
+                dataGrid.ItemsSource = context.Region.ToList(); // Обновляем источник данных для DataGrid
             }
         }
     }

@@ -27,15 +27,22 @@ namespace WpfApp1.Pages
     /// </summary>
     public partial class RegPage : Page
     {
-        public Client _client = new Client();
-        public Rieltor _rieltor = new Rieltor();
-        public bool isEdit;
+        public Client _client = new Client(); // Объект клиента
+        public Rieltor _rieltor = new Rieltor(); // Объект риелтора
+        public bool isEdit; // Флаг, указывающий, редактируется ли существующий пользователь
+
+        // Перечисление для ролей пользователей
         public enum UserRole
         {
             Client,
             Rieltor,
         }
 
+        /// <summary>
+        /// Конструктор страницы регистрации.
+        /// </summary>
+        /// <param name="client">Объект клиента, если редактируется существующий клиент.</param>
+        /// <param name="rieltor">Объект риелтора, если редактируется существующий риелтор.</param>
         public RegPage(Client client = null, Rieltor rieltor = null)
         {
             InitializeComponent();
@@ -45,43 +52,51 @@ namespace WpfApp1.Pages
 
             if (client != null)
             {
+                // Инициализация данных для редактирования клиента
                 InitializeUser(client, UserRole.Client);
             }
             else if (rieltor != null)
             {
+                // Инициализация данных для редактирования риелтора
                 InitializeUser(rieltor, UserRole.Rieltor);
             }
             else
             {
-                // Обработка других ролей (если есть)
+                // Скрытие панелей, если пользователь не выбран
                 RieltorPanel.Visibility = Visibility.Collapsed;
                 ClientPanel.Visibility = Visibility.Collapsed;
             }
         }
 
+        /// <summary>
+        /// Инициализация данных пользователя в зависимости от роли.
+        /// </summary>
+        /// <param name="user">Объект пользователя (клиент или риелтор).</param>
+        /// <param name="role">Роль пользователя.</param>
         private void InitializeUser(object user, UserRole role)
         {
             if (user is Client client)
             {
                 _client = client;
-                DataContext = _client;
-                CmbBox.SelectedIndex = (int)UserRole.Client;
-                ClientPanel.Visibility = Visibility.Visible;
-                RieltorPanel.Visibility = Visibility.Collapsed;
+                DataContext = _client; // Установка контекста данных для клиента
+                CmbBox.SelectedIndex = (int)UserRole.Client; // Установка выбранной роли
+                ClientPanel.Visibility = Visibility.Visible; // Показ панели клиента
+                RieltorPanel.Visibility = Visibility.Collapsed; // Скрытие панели риелтора
             }
             else if (user is Rieltor rieltor)
             {
                 _rieltor = rieltor;
-                DataContext = _rieltor;
-                CmbBox.SelectedIndex = (int)UserRole.Rieltor;
-                RieltorPanel.Visibility = Visibility.Visible;
-                ClientPanel.Visibility = Visibility.Collapsed;
+                DataContext = _rieltor; // Установка контекста данных для риелтора
+                CmbBox.SelectedIndex = (int)UserRole.Rieltor; // Установка выбранной роли
+                RieltorPanel.Visibility = Visibility.Visible; // Показ панели риелтора
+                ClientPanel.Visibility = Visibility.Collapsed; // Скрытие панели клиента
             }
 
-            CmbBox.IsEnabled = false;
-            regBut.Content = "Редактировать";
-            isEdit = true;
+            CmbBox.IsEnabled = false; // Блокировка ComboBox для редактирования
+            regBut.Content = "Редактировать"; // Изменение текста кнопки
+            isEdit = true; // Установка флага редактирования
         }
+
         /// <summary>
         /// Обработчик изменения выбранного элемента в ComboBox.
         /// </summary>
@@ -114,6 +129,8 @@ namespace WpfApp1.Pages
                 MessageBox.Show("Пожалуйста, заполните все обязательные поля: Фамилия, Имя, Отчество.");
                 return;
             }
+
+            // Проверка на заполненность логина и пароля
             if (string.IsNullOrWhiteSpace(Login_TextBox.Text) || string.IsNullOrWhiteSpace(Pass_TextBox.Text))
             {
                 MessageBox.Show("Пожалуйста, заполните логин и пароль.");
@@ -121,6 +138,7 @@ namespace WpfApp1.Pages
             }
 
             var context = DBEntities.GetContext();
+            // Проверка на уникальность логина
             bool isLoginExists = context.Client.Any(x => x.Login == Login_TextBox.Text) ||
                                  context.Rieltor.Any(x => x.Login == Login_TextBox.Text);
 
@@ -129,6 +147,7 @@ namespace WpfApp1.Pages
                 MessageBox.Show("Пользователь с таким логином уже существует. Пожалуйста, выберите другой логин.");
                 return;
             }
+
             if (CmbBox.SelectedIndex == 0) // Если выбрана роль "Клиент"
             {
                 // Проверка на заполненность полей, специфичных для клиента (Номер телефона и Email)
@@ -182,6 +201,10 @@ namespace WpfApp1.Pages
                 }
             }
         }
+
+        /// <summary>
+        /// Добавление нового клиента в базу данных.
+        /// </summary>
         private void AddClient()
         {
             var context = DBEntities.GetContext();
@@ -226,6 +249,10 @@ namespace WpfApp1.Pages
                 Console.WriteLine("Произошла ошибка: " + ex.Message);
             }
         }
+
+        /// <summary>
+        /// Редактирование существующего клиента.
+        /// </summary>
         private void EditClient()
         {
             var context = DBEntities.GetContext();
@@ -259,6 +286,10 @@ namespace WpfApp1.Pages
                 Console.WriteLine("Произошла ошибка: " + ex.Message);
             }
         }
+
+        /// <summary>
+        /// Добавление нового риелтора в базу данных.
+        /// </summary>
         private void AddRieltor()
         {
             var context = DBEntities.GetContext();
@@ -302,6 +333,10 @@ namespace WpfApp1.Pages
                 Console.WriteLine("Произошла ошибка: " + ex.Message);
             }
         }
+
+        /// <summary>
+        /// Редактирование существующего риелтора.
+        /// </summary>
         private void EditRieltor()
         {
             var context = DBEntities.GetContext();
@@ -334,6 +369,12 @@ namespace WpfApp1.Pages
                 Console.WriteLine("Произошла ошибка: " + ex.Message);
             }
         }
+
+        /// <summary>
+        /// Генерация и сохранение QR-кода с логином и паролем.
+        /// </summary>
+        /// <param name="login">Логин пользователя.</param>
+        /// <param name="password">Пароль пользователя.</param>
         private void GenerateAndSaveQRCode(string login, string password)
         {
             // Создаем строку для кодирования в QR-код
@@ -379,24 +420,24 @@ namespace WpfApp1.Pages
             };
             qrWindow.Show();
 
-            // сохранение QR-код на ПК
-                SaveFileDialog saveFileDialog = new SaveFileDialog
+            // Сохранение QR-кода на ПК
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "PNG Image|*.png",
+                Title = "Сохранить QR-код"
+            };
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                using (var fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
                 {
-                    Filter = "PNG Image|*.png",
-                    Title = "Сохранить QR-код"
-                };
-                if (saveFileDialog.ShowDialog() == true)
-                {
-                    using (var fileStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
-                    {
-                        qrCodeImage.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
-                    }
-                    MessageBox.Show("QR-код успешно сохранен.");
+                    qrCodeImage.Save(fileStream, System.Drawing.Imaging.ImageFormat.Png);
                 }
+                MessageBox.Show("QR-код успешно сохранен.");
+            }
         }
 
         /// <summary>
-        /// Обработчик ввода текста в поле с цифрами
+        /// Обработчик ввода текста в поле с цифрами.
         /// Разрешает ввод только цифр.
         /// </summary>
         private void Number_TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -407,8 +448,9 @@ namespace WpfApp1.Pages
                 e.Handled = true; // Отменяем ввод, если символ не цифра
             }
         }
+
         /// <summary>
-        /// Обработчик ввода текста в поле с буквами
+        /// Обработчик ввода текста в поле с буквами.
         /// Разрешает ввод только букв.
         /// </summary>
         private void LettersOnlyTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -421,9 +463,12 @@ namespace WpfApp1.Pages
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Назад".
+        /// </summary>
         private void backBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.GoBack();
+            frameMain.frame.GoBack(); // Возврат на предыдущую страницу
         }
     }
 }

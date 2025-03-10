@@ -41,43 +41,60 @@ namespace WpfApp1.Pages
             frameMain.frame.Navigate(new RegPage(null));
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Вход".
+        /// Проверяет введенные логин и пароль и перенаправляет пользователя на соответствующую страницу.
+        /// </summary>
         private void EntryBut_Click(object sender, RoutedEventArgs e)
         {
+            // Поиск клиента в базе данных по логину и паролю
             var checkClient = DBEntities.GetContext().Client.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
+            // Поиск риелтора в базе данных по логину и паролю
             var checkRieltor = DBEntities.GetContext().Rieltor.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
 
             if (checkClient != null)
             {
+                // Очистка текущих данных пользователя
                 frameMain.CurrentClient = null;
                 frameMain.CurrentRieltor = null;
-                frameMain.CurrentClient = checkClient; // Сохраняем клиента
+                // Сохранение текущего клиента
+                frameMain.CurrentClient = checkClient;
+                // Переход на главную страницу клиента
                 frameMain.frame.Navigate(new ClientMainPage());
             }
             else if (checkRieltor != null)
             {
+                // Очистка текущих данных пользователя
                 frameMain.CurrentClient = null;
                 frameMain.CurrentRieltor = null;
-                frameMain.CurrentRieltor = checkRieltor; // Сохраняем риелтора
+                // Сохранение текущего риелтора
+                frameMain.CurrentRieltor = checkRieltor;
+                // Переход на главную страницу риелтора
                 frameMain.frame.Navigate(new RieltorMainPage());
             }
             else
             {
+                // Вывод сообщения об ошибке, если логин или пароль неверны
                 MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "QR-код".
+        /// Позволяет пользователю выбрать изображение QR-кода, декодировать его и автоматически заполнить поля логина и пароля.
+        /// </summary>
         private void QrBut_Click(object sender, RoutedEventArgs e)
         {
             // Открытие диалога выбора файла
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
-                Filter = "PNG Image|*.png",
-                Title = "Выберите QR-код"
+                Filter = "PNG Image|*.png", // Фильтр для выбора только PNG изображений
+                Title = "Выберите QR-код" // Заголовок диалогового окна
             };
 
             if (openFileDialog.ShowDialog() == true)
             {
-                // Загрузка изображения
+                // Загрузка выбранного изображения
                 var bitmapImage = new BitmapImage(new Uri(openFileDialog.FileName));
 
                 // Декодирование QR-кода
@@ -97,30 +114,41 @@ namespace WpfApp1.Pages
                         // Заполнение полей логина и пароля
                         Login.Text = login;
                         Password.Text = password;
+
+                        // Поиск клиента в базе данных по логину и паролю
                         var checkClient = DBEntities.GetContext().Client.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
+                        // Поиск риелтора в базе данных по логину и паролю
                         var checkRieltor = DBEntities.GetContext().Rieltor.FirstOrDefault(x => x.Login == Login.Text && x.Password == Password.Text);
+
                         if (checkClient != null)
                         {
-                            frameMain.CurrentClient = checkClient; // Сохраняем клиента
+                            // Сохранение текущего клиента
+                            frameMain.CurrentClient = checkClient;
+                            // Переход на главную страницу клиента
                             frameMain.frame.Navigate(new ClientMainPage());
                         }
                         else if (checkRieltor != null)
                         {
-                            frameMain.CurrentRieltor = checkRieltor; // Сохраняем риелтора
+                            // Сохранение текущего риелтора
+                            frameMain.CurrentRieltor = checkRieltor;
+                            // Переход на главную страницу риелтора
                             frameMain.frame.Navigate(new RieltorMainPage());
                         }
                         else
                         {
+                            // Вывод сообщения об ошибке, если логин или пароль неверны
                             MessageBox.Show("Неверный логин или пароль", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                     else
                     {
+                        // Вывод сообщения об ошибке, если формат QR-кода неверный
                         MessageBox.Show("Неверный формат QR-кода", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                 }
                 else
                 {
+                    // Вывод сообщения об ошибке, если QR-код не удалось декодировать
                     MessageBox.Show("Не удалось декодировать QR-код", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }

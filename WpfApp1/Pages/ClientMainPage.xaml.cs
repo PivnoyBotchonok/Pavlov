@@ -24,15 +24,25 @@ namespace WpfApp1.Pages
         public ClientMainPage()
         {
             InitializeComponent();
+
+            // Загрузка данных клиентов в DataGrid
             dataGrid.ItemsSource = DBEntities.GetContext().Client.ToList();
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Добавить".
+        /// Переход на страницу регистрации нового клиента.
+        /// </summary>
         private void addBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.isClient = true;
-            frameMain.frame.Navigate(new RegPage(null));
+            frameMain.isClient = true; // Устанавливаем флаг, что добавляется клиент
+            frameMain.frame.Navigate(new RegPage(null)); // Переход на страницу регистрации
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Удалить".
+        /// Удаление выбранных клиентов из базы данных.
+        /// </summary>
         private void delBut_Click(object sender, RoutedEventArgs e)
         {
             // Получаем выбранные элементы для удаления из DataGrid
@@ -41,6 +51,7 @@ namespace WpfApp1.Pages
             // Проверяем, есть ли выбранные элементы
             if (itemsForRemoving.Count == 0)
             {
+                // Вывод сообщения, если не выбрано ни одного элемента
                 MessageBox.Show("Не выбрано ни одного элемента для удаления.", "Внимание", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
@@ -71,13 +82,23 @@ namespace WpfApp1.Pages
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Редактировать".
+        /// Переход на страницу редактирования выбранного клиента.
+        /// </summary>
         private void editBut_Click(object sender, RoutedEventArgs e)
         {
+            // Переход на страницу регистрации с передачей выбранного клиента для редактирования
             frameMain.frame.Navigate(new RegPage((sender as Button).DataContext as Client));
         }
+
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Назад".
+        /// Возврат на страницу входа в систему.
+        /// </summary>
         private void backBut_Click(object sender, RoutedEventArgs e)
         {
-            frameMain.frame.Navigate(new LogPage());
+            frameMain.frame.Navigate(new LogPage()); // Переход на страницу входа
         }
     }
 }
